@@ -30,12 +30,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         Product::create($request->all());
-        // $product = new Product;
-        // $product->descripcion = $request->description;
-        // $product->tipo = $request->type;
-        // $product->costo = $request->price;
-        // $product->cantidad = $request->quantity;
-        // $product->save();
 
         return redirect()->route('products.index');
     }
@@ -45,7 +39,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+       return view('web.products.show', compact('product'));
     }
 
     /**

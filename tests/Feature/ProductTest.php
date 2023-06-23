@@ -65,7 +65,7 @@ class ProductTest extends TestCase
     }
 
     /**
-     * @test the products index page has non empty data table
+     * @test the products can create a new product
      */
     public function test_can_create_a_new_product(): void
     {
@@ -91,6 +91,29 @@ class ProductTest extends TestCase
 
         $this->assertEquals($product['descripcion'], $productCreated->descripcion);
         $this->assertEquals($product['cantidad'], $productCreated->cantidad);
+
+    }
+
+    /**
+     * @test the products can show a product
+     */
+    public function test_can_show_a_product(): void
+    {
+        //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
+        Product::factory(20)->create();
+        
+        $product = Product::find(5); //Se busca el producto con el Id. 5
+
+        $response = $this->get(route('products.show', [$product])); //Se obtiene la respuesta GET del HTTP
+
+        $response->assertStatus(200); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
+
+        $response->assertViewIs('web.products.show'); //Afirma si la vista es web.products.show como respuesta
+
+        $response->assertViewHas('product', $product); //Afirma que la vista tiene la coleccion de datos del producto como respuesta
+
+        $response->assertSee($product->descripcion); //Afirma que la vista contiene la descripcion del producto. 
+        
 
     }
 

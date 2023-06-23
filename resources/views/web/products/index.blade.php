@@ -28,6 +28,7 @@
                             <th class="has-text-link">Type</th>
                             <th class="has-text-link">Price</th>
                             <th class="has-text-link">Stock</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,17 @@
                                 <td>{{ $product->tipo }}</td>
                                 <td>{{ $product->costo }}</td>
                                 <td>{{ $product->cantidad }}</td>
+                                <td class="">
+                                    <div class="buttons">
+                                        <a href="{{ route('products.show', [$product]) }}"
+                                            class="button is-primary is-outlined">Ver</a>
+                                        <a href="#" class="button is-info">Editar</a>
+                                        <a href="#" class="button is-danger is-dark">Eliminar</a>
+                                    </div>
+
+                                </td>
+                            
+
                             </tr>
                         @empty
                             <tr>
