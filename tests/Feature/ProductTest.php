@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test the route of products index page is ok
      */
@@ -17,7 +17,7 @@ class ProductTest extends TestCase
     {
         //$response = $this->get('/web/products'); //la forma normal de indicar la URL
         $response = $this->get(route('products.index'));   //Se obtiene la respuesta HTTP de la ruta "products.index"
-                                                            //la forma con helper route, es mas declarativa, para indicar la URL
+        //la forma con helper route, es mas declarativa, para indicar la URL
         $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
 
     }
@@ -99,7 +99,7 @@ class ProductTest extends TestCase
 
         $this->assertDatabaseCount('products', 1); //Se afirma que el conteo de registro en la base de datos es 1
 
-        $productCreated = Product::latest()->first(); //Se obtiene el ultimo producto creado.     
+        $productCreated = Product::latest()->first(); //Se obtiene el ultimo producto creado.
 
         $this->assertDatabaseHas('products', $product); //Se afirma que los datos del ultimo producto se encuentre en la base de datos.
 
@@ -115,7 +115,7 @@ class ProductTest extends TestCase
     {
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
-        
+
         $product = Product::find(5); //Se busca el producto con el Id. 5
 
         $response = $this->get(route('products.show', [$product])); //Se obtiene la respuesta GET del HTTP
@@ -126,8 +126,7 @@ class ProductTest extends TestCase
 
         $response->assertViewHas('product', $product); //Afirma que la vista tiene la coleccion de datos del producto como respuesta
 
-        $response->assertSee(strtoupper($product->descripcion)); //Afirma que la vista contiene la descripcion del producto. 
-        
+        $response->assertSee(strtoupper($product->descripcion)); //Afirma que la vista contiene la descripcion del producto.
 
     }
 
@@ -138,7 +137,7 @@ class ProductTest extends TestCase
     {
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
-        
+
         $product = Product::find(9); //Se busca el producto con el Id. 9
 
         $response = $this->get(route('products.edit', [$product])); //Se obtiene la respuesta HTTP de la ruta "products.create"
@@ -157,7 +156,7 @@ class ProductTest extends TestCase
     {
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
-        
+
         $product = Product::find(11); //Se busca el producto con el Id. 11
 
         $newData = [
@@ -165,7 +164,6 @@ class ProductTest extends TestCase
             'costo' => 256.88,
             'cantidad' => 80,
         ]; //La nueva información para actualizar sobre el producto encontrado
- 
 
         $response = $this->patch(route('products.update', [$product]), $newData); //Se obtiene la respuesta GET del HTTP
 
@@ -174,7 +172,7 @@ class ProductTest extends TestCase
         $response->assertRedirect(route('products.index')); //Se afirma que el redireccionamiento sea dirigido a la ruta "products.index"
 
         $this->assertDatabaseHas('products', $newData); //Se afirma que los datos del producto se encuentre en la base de datos.
-        
+
         $productEdited = Product::find(11); //Se busca el producto con el Id. 11, ya editado
 
         $this->assertNotEquals($product->descripcion, $productEdited->descripcion); //Se afirma que el valor de descripcion original es diferente al valor del producto editado
@@ -183,8 +181,5 @@ class ProductTest extends TestCase
         $this->assertEquals($newData['descripcion'], $productEdited->descripcion); //Se afirma que el nuevo valor de descripcion sea igual al del producto editado.
         $this->assertEquals($newData['cantidad'], $productEdited->cantidad); //Se afirma que el nuevo valor de cantidad sea igual al del producto editado.
 
-
-
     }
-
 }
