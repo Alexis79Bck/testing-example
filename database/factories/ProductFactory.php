@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'descripcion' => fake()->words(5, true),
-            'tipo' => fake()->randomElement(['Audio', 'Video', 'Juegos', 'Accesorio', 'Extesión']),
+            'tipo' => fake()->randomElement(['Audio', 'Video', 'Juegos', 'Accesorio', 'Extensión']),
             'costo' => fake()->randomFloat(2, 10, 9999),
             'cantidad' => fake()->randomNumber(4),
         ];

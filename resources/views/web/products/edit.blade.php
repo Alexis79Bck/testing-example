@@ -18,7 +18,7 @@
             <div class="column is-half is-offset-one-quarter ">
                 <div class="card">
                     <div class="card-content">
-                        <form action="{{ route('products.update', [$product]) }}" method="patch">
+                        <form action="{{ route('products.update', [$product]) }}" method="PATCH">
                             @csrf
                             <div class="field">
                                 <label class="label">Id. # {{ $product->id }}</label>
@@ -36,11 +36,11 @@
                                 <div class="select" >
                                         <select name="tipo" value="{{ $product->tipo }}">
                                           <option>--</option>
-                                          <option value="Audio">Audio</option>
-                                          <option value="Video">Video</option>
-                                          <option value="Juegos">Juegos</option>
-                                          <option value="Accesorio">Accesorio</option>
-                                          <option value="Extensión">Extensión</option>
+                                          <option value="Audio" {{ $product->tipo == 'Audio' ? 'selected' : null }}>Audio</option>
+                                          <option value="Video" {{ $product->tipo == 'Video' ? 'selected' : null }}>Video</option>
+                                          <option value="Juegos" {{ $product->tipo == 'Juegos' ? 'selected' : null }}>Juegos</option>
+                                          <option value="Accesorio" {{ $product->tipo == 'Accesorio' ? 'selected' : null }}>Accesorio</option>
+                                          <option value="Extensión" {{ $product->tipo == 'Extensión' ? 'selected' : null }}>Extensión</option>
                                         </select>
                                 </div>
                             </div>
@@ -59,8 +59,8 @@
                                 </div>
                             </div>
                             <div class="field is-grouped">
-                                <div class="control">
-                                  <button type="submit" class="button is-link">Update</button>
+                                <div class="control">                                     
+                                   <button type="submit" class="button is-link">Update</button> 
                                 </div>
                                 <div class="control">
                                   <a href="{{ route('products.index') }}" class="button is-secondary">Cancel</a>
