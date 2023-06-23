@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/web/products', [ProductController::class,'index'])->name('products.index');
 Route::post('/web/products/new-product', [ProductController::class,'store'])->name('products.store');
+Route::get('/web/products/create-product', [ProductController::class,'create'])->name('products.create');
