@@ -23,9 +23,9 @@ class ProductTest extends TestCase
     }
 
     /**
-     * @test the view page is web.products.index
+     * @test the view is web.products.index
      */
-    public function test_the_view_page_is_web_products_index(): void
+    public function test_the_view_is_web_products_index(): void
     {
         $response = $this->get(route('products.index')); //Se obtiene la respuesta HTTP de la ruta "products.index"
         $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
@@ -62,6 +62,20 @@ class ProductTest extends TestCase
         $response = $this->get(route('products.index')); //Se obtiene la respuesta HTTP de la ruta "products.index"
         $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
         $response->assertDontSee('No se encontró ningun producto.'); //Afirma que la vista contiene el texto "No se encontró el producto."
+    }
+
+    /**
+     * @test the create product form page is ok
+     */
+    public function test_the_create_product_form_page_is_ok(): void
+    {
+        $response = $this->get(route('products.create')); //Se obtiene la respuesta HTTP de la ruta "products.create"
+        $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
+        $response->assertViewIs('web.products.create'); //Afirma si la vista es web.products.create como respuesta
+
+        $response->assertSee('New Product'); //Afirma que la vista contiene el texto "New Product"
+        $response->assertSee('Description'); //Afirma que la vista contiene el texto "Description"
+        $response->assertSee('Quantity'); //Afirma que la vista contiene el texto "Quantity"
     }
 
     /**
@@ -106,14 +120,70 @@ class ProductTest extends TestCase
 
         $response = $this->get(route('products.show', [$product])); //Se obtiene la respuesta GET del HTTP
 
-        $response->assertStatus(200); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
+        $response->assertStatus(200); //Se afirma si la respuesta genera el codigo de estado 200 OK
 
         $response->assertViewIs('web.products.show'); //Afirma si la vista es web.products.show como respuesta
 
         $response->assertViewHas('product', $product); //Afirma que la vista tiene la coleccion de datos del producto como respuesta
 
-        $response->assertSee($product->descripcion); //Afirma que la vista contiene la descripcion del producto. 
+        $response->assertSee(strtoupper($product->descripcion)); //Afirma que la vista contiene la descripcion del producto. 
         
+
+    }
+
+    /**
+     * @test the edit product form page is ok
+     */
+    public function test_the_edit_product_form_page_is_ok(): void
+    {
+        //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
+        Product::factory(20)->create();
+        
+        $product = Product::find(9); //Se busca el producto con el Id. 9
+
+        $response = $this->get(route('products.edit', [$product])); //Se obtiene la respuesta HTTP de la ruta "products.create"
+        $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
+        $response->assertViewIs('web.products.edit'); //Afirma si la vista es web.products.create como respuesta
+
+        $response->assertSee('Edit Product'); //Afirma que la vista contiene el texto "Edit Product"
+        $response->assertSee('Description'); //Afirma que la vista contiene el texto "Description"
+        $response->assertSee('Quantity'); //Afirma que la vista contiene el texto "Quantity"
+    }
+
+    /**
+     * @test the products can edit a product
+     */
+    public function test_can_edit_a_product(): void
+    {
+        //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
+        Product::factory(20)->create();
+        
+        $product = Product::find(11); //Se busca el producto con el Id. 11
+
+        $newData = [
+            'descripcion' => 'Nueva Descripcion desde Editar',
+            'costo' => 256.88,
+            'cantidad' => 80,
+        ]; //La nueva información para actualizar sobre el producto encontrado
+ 
+
+        $response = $this->patch(route('products.update', [$product]), $newData); //Se obtiene la respuesta GET del HTTP
+
+        $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
+
+        $response->assertRedirect(route('products.index')); //Se afirma que el redireccionamiento sea dirigido a la ruta "products.index"
+
+        $this->assertDatabaseHas('products', $newData); //Se afirma que los datos del producto se encuentre en la base de datos.
+        
+        $productEdited = Product::find(11); //Se busca el producto con el Id. 11, ya editado
+
+        $this->assertNotEquals($product->descripcion, $productEdited->descripcion); //Se afirma que el valor de descripcion original es diferente al valor del producto editado
+        $this->assertNotEquals($product->cantidad, $productEdited->cantidad); //Se afirma que el valor de cantidad original es diferente al valor del producto editado
+
+        $this->assertEquals($newData['descripcion'], $productEdited->descripcion); //Se afirma que el nuevo valor de descripcion sea igual al del producto editado.
+        $this->assertEquals($newData['cantidad'], $productEdited->cantidad); //Se afirma que el nuevo valor de cantidad sea igual al del producto editado.
+
+
 
     }
 

@@ -22,3 +22,5 @@ Route::get('/web/products', [ProductController::class,'index'])->name('products.
 Route::get('/web/products/create-product', [ProductController::class,'create'])->name('products.create');
 Route::post('/web/products/new-product', [ProductController::class,'store'])->name('products.store');
 Route::get('/web/products/{product}', [ProductController::class,'show'])->name('products.show');
+Route::get('/web/products/edit-product/{product}', [ProductController::class,'edit'])->name('products.edit');
+Route::patch('/web/products/edit-product/{product}', [ProductController::class,'update'])->name('products.update');

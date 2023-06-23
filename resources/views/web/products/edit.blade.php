@@ -11,26 +11,30 @@
     <div class="mt-3 container">
         <div class="columns is-desktop">
             <div class="column has-background-link">
-                <div class="title has-text-white has-text-centered"> New Product </div>
+                <div class="title has-text-white has-text-centered"> Edit Product </div>
             </div>
         </div>
         <div class="columns ">
             <div class="column is-half is-offset-one-quarter ">
                 <div class="card">
                     <div class="card-content">
-                        <form action="{{ route('products.store') }}" method="post">
+                        <form action="{{ route('products.update', [$product]) }}" method="patch">
                             @csrf
+                            <div class="field">
+                                <label class="label">Id. # {{ $product->id }}</label>
+                                 
+                            </div>
                             <div class="field">
                                 <label class="label">Description</label>
                                 <div class="control">
-                                    <input class="input" type="text" name="descripcion">
+                                    <input class="input" type="text" name="descripcion" value="{{ $product->descripcion }}">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <label class="label">Type</label>
                                 <div class="select" >
-                                        <select name="tipo">
+                                        <select name="tipo" value="{{ $product->tipo }}">
                                           <option>--</option>
                                           <option value="Audio">Audio</option>
                                           <option value="Video">Video</option>
@@ -44,19 +48,19 @@
                             <div class="field">
                                 <label class="label">Price</label>
                                 <div class="control">
-                                    <input class="input" type="number" step="0.01" name="costo">
+                                    <input class="input" type="number" step="0.01" name="costo" value="{{ $product->costo}}">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <label class="label">Quantity</label>
                                 <div class="control">
-                                    <input class="input" type="number" step="1" name="cantidad">
+                                    <input class="input" type="number" step="1" name="cantidad" value="{{ $product->cantidad}}">
                                 </div>
                             </div>
                             <div class="field is-grouped">
                                 <div class="control">
-                                  <button type="submit" class="button is-link">Save</button>
+                                  <button type="submit" class="button is-link">Update</button>
                                 </div>
                                 <div class="control">
                                   <a href="{{ route('products.index') }}" class="button is-secondary">Cancel</a>
