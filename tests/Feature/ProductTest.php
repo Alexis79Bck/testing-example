@@ -63,4 +63,25 @@ class ProductTest extends TestCase
         $response->assertDontSee('No se encontró ningun producto.'); //Afirma que la vista contiene el texto "No se encontró el producto."
     }
 
+    /**
+     * @test the products index page has non empty data table
+     */
+    public function test_can_create_a_new_product(): void
+    {
+        $product = [
+            'descripcion' => 'Producto #1',
+            'tipo' => 'Video',
+            'costo' => 312,
+            'cantidad' => 7264,
+        ];
+
+        $response = $this->post(route('products.store'), $product);
+        $response->assertCreated();
+        $response->assertRedirect(route('products.index'));
+        $response->assertDatabaseCount('products',1);
+        $response->assertDatabaseHas('products', $product);
+      
+         
+    }
+
 }

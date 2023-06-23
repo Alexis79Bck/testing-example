@@ -29,7 +29,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+        $products = Product::all();
+        return view('web.products.index', compact('products'));
     }
 
     /**
