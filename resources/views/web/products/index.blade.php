@@ -41,8 +41,8 @@
                                 <td>{{ $product->cantidad }}</td>
                                 <td class="">
                                     <div class="buttons">
-                                        <a href="{{ route('products.show', [$product]) }}" class="button is-primary is-outlined">Ver</a>
-                                        <a href="{{ route('products.edit', [$product]) }}" class="button is-info">Editar</a>
+                                        <a href="{{ route('products.show', $product->id) }}" class="button is-primary is-outlined">Ver</a>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="button is-info">Editar</a>
                                         <a href="#" class="button is-danger is-dark">Eliminar</a>
                                     </div>
 

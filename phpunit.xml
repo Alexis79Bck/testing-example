@@ -26,15 +26,15 @@
         <env name="CACHE_DRIVER" value="array"/>
 
         <!-- Configuracion de MySql para el entorno de pruebas -->
-        <!-- <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_CONNECTION" value="mysql"/>
         <env name="DB_HOST" value="127.0.0.1"/>
-        <env name="DB_PORT" value="3308"/>
+        <env name="DB_PORT" value="3306"/>
         <env name="DB_DATABASE" value="products_testing"/>
         <env name="DB_USERNAME" value="root"/>
-        <env name="DB_PASSWORD" value=""/> -->
+        <env name="DB_PASSWORD" value=""/>
 
-        <env name="DB_CONNECTION" value="sqlite"/>
-         <env name="DB_DATABASE" value=":memory:"/>
+        <!-- <env name="DB_CONNECTION" value="sqlite"/>
+         <env name="DB_DATABASE" value=":memory:"/> -->
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

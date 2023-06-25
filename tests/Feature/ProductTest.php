@@ -4,11 +4,23 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Reiniciar el autoincremental del ID de la tabla products
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('products')->truncate();
+        DB::statement('ALTER TABLE products AUTO_INCREMENT = 1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    }
 
     /**
      * @test the route of products index page is ok
@@ -83,6 +95,7 @@ class ProductTest extends TestCase
      */
     public function test_can_create_a_new_product(): void
     {
+
         //Data de prueba, en este caso se utilizó 1 solo producto, pero puede realizarse con N cantidad.
         $product = [
             'descripcion' => 'Producto #1',
@@ -135,10 +148,11 @@ class ProductTest extends TestCase
      */
     public function test_the_edit_product_form_page_is_ok(): void
     {
+
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
 
-        $product = Product::find(9); //Se busca el producto con el Id. 9
+        $product = Product::find(11); //Se busca el producto con el Id. 9
 
         $response = $this->get(route('products.edit', [$product])); //Se obtiene la respuesta HTTP de la ruta "products.create"
         $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
@@ -154,10 +168,11 @@ class ProductTest extends TestCase
      */
     public function test_can_edit_a_product(): void
     {
+
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
 
-        $product = Product::find(11); //Se busca el producto con el Id. 11
+        $product = Product::find(6); //Se busca el producto con el Id. 11
 
         $newData = [
             'descripcion' => 'Nueva Descripcion desde Editar',
@@ -165,7 +180,7 @@ class ProductTest extends TestCase
             'cantidad' => 80,
         ]; //La nueva información para actualizar sobre el producto encontrado
 
-        $response = $this->patch(route('products.update', [$product]), $newData); //Se obtiene la respuesta GET del HTTP
+        $response = $this->put(route('products.update', $product), $newData); //Se obtiene la respuesta GET del HTTP
 
         $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
 
@@ -173,7 +188,7 @@ class ProductTest extends TestCase
 
         $this->assertDatabaseHas('products', $newData); //Se afirma que los datos del producto se encuentre en la base de datos.
 
-        $productEdited = Product::find(11); //Se busca el producto con el Id. 11, ya editado
+        $productEdited = Product::find(6); //Se busca el producto con el Id. 11, ya editado
 
         $this->assertNotEquals($product->descripcion, $productEdited->descripcion); //Se afirma que el valor de descripcion original es diferente al valor del producto editado
         $this->assertNotEquals($product->cantidad, $productEdited->cantidad); //Se afirma que el valor de cantidad original es diferente al valor del producto editado

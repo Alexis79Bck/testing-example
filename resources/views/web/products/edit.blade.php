@@ -18,8 +18,9 @@
             <div class="column is-half is-offset-one-quarter ">
                 <div class="card">
                     <div class="card-content">
-                        <form action="{{ route('products.update', [$product]) }}" method="PATCH">
+                        <form action="{{ route('products.update', $product->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="field">
                                 <label class="label">Id. # {{ $product->id }}</label>
                                  
