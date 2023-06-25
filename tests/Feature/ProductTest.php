@@ -152,7 +152,7 @@ class ProductTest extends TestCase
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
 
-        $product = Product::find(11); //Se busca el producto con el Id. 9
+        $product = Product::find(11); //Se busca el producto con el Id. 11
 
         $response = $this->get(route('products.edit', [$product])); //Se obtiene la respuesta HTTP de la ruta "products.create"
         $response->assertStatus(200); //Afirma si la ruta devuelve el Estado HTTP 200
@@ -172,7 +172,7 @@ class ProductTest extends TestCase
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
         Product::factory(20)->create();
 
-        $product = Product::find(6); //Se busca el producto con el Id. 11
+        $product = Product::find(6); //Se busca el producto con el Id. 6
 
         $newData = [
             'descripcion' => 'Nueva Descripcion desde Editar',
@@ -188,13 +188,38 @@ class ProductTest extends TestCase
 
         $this->assertDatabaseHas('products', $newData); //Se afirma que los datos del producto se encuentre en la base de datos.
 
-        $productEdited = Product::find(6); //Se busca el producto con el Id. 11, ya editado
+        $productEdited = Product::find(6); //Se busca el producto con el Id. 6, ya editado
 
         $this->assertNotEquals($product->descripcion, $productEdited->descripcion); //Se afirma que el valor de descripcion original es diferente al valor del producto editado
         $this->assertNotEquals($product->cantidad, $productEdited->cantidad); //Se afirma que el valor de cantidad original es diferente al valor del producto editado
 
         $this->assertEquals($newData['descripcion'], $productEdited->descripcion); //Se afirma que el nuevo valor de descripcion sea igual al del producto editado.
         $this->assertEquals($newData['cantidad'], $productEdited->cantidad); //Se afirma que el nuevo valor de cantidad sea igual al del producto editado.
+
+    }
+
+    /**
+     * @test the products can delete a product
+     */
+    public function test_can_delete_a_product(): void
+    {
+
+        //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
+        Product::factory(20)->create();
+
+        $product = Product::find(11); //Se busca el producto con el Id. 11
+
+        $response = $this->delete(route('products.delete', $product)); //Se obtiene la respuesta GET del HTTP
+
+        $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
+
+        $response->assertRedirect(route('products.index')); //Se afirma que el redireccionamiento sea dirigido a la ruta "products.index"
+        
+        $response = $this->get(route('products.show', $product)); //Se obtiene la respuesta GET del HTTP
+        
+        $response->assertNotFound(); //Se afirma si la respuesta genera el codigo de estado 404 para la URL que no existe
+        
+        $this->assertDatabaseMissing('products', $product->toArray()); //Se afirma que los datos del producto se encuentre en la base de datos.
 
     }
 }

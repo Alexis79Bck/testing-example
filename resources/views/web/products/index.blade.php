@@ -43,7 +43,12 @@
                                     <div class="buttons">
                                         <a href="{{ route('products.show', $product->id) }}" class="button is-primary is-outlined">Ver</a>
                                         <a href="{{ route('products.edit', $product->id) }}" class="button is-info">Editar</a>
-                                        <a href="#" class="button is-danger is-dark">Eliminar</a>
+                                        <form action="{{ route('products.delete', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="button is-danger is-dark">Eliminar</button>
+                                        </form>
+                                        
                                     </div>
 
                                 </td>

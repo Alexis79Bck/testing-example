@@ -24,3 +24,4 @@ Route::post('/web/products/new-product', [ProductController::class, 'store'])->n
 Route::get('/web/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/web/products/edit-product/{product}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/web/products/update/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/web/products/delete/{product}', [ProductController::class, 'destroy'])->name('products.delete');
