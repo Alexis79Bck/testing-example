@@ -23,45 +23,57 @@
                             <div class="field">
                                 <label class="label">Description</label>
                                 <div class="control">
-                                    <input class="input" type="text" name="descripcion">
+                                    <input class="input" type="text" name="descripcion" value="{{ old('descripcion') }}">
+                                    @error('descripcion')
+                                        <p class="help is-size-6 is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="field">
                                 <label class="label">Type</label>
-                                <div class="select" >
-                                        <select name="tipo">
-                                          <option>--</option>
-                                          <option value="Audio">Audio</option>
-                                          <option value="Video">Video</option>
-                                          <option value="Juegos">Juegos</option>
-                                          <option value="Accesorio">Accesorio</option>
-                                          <option value="Extensión">Extensión</option>
-                                        </select>
+                                <div class="select">
+                                    <select name="tipo">
+                                        <option value="Seleccione">- Seleccione -</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="Video">Video</option>
+                                        <option value="Juegos">Juegos</option>
+                                        <option value="Accesorio">Accesorio</option>
+                                        <option value="Extensión">Extensión</option>
+                                    </select>
                                 </div>
+                                @error('tipo')
+                                    <p class="help is-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="field">
                                 <label class="label">Price</label>
                                 <div class="control">
-                                    <input class="input" type="number" step="0.01" name="costo">
+                                    <input class="input" type="number" step="0.01" name="costo" value="0">
                                 </div>
+                                @error('costo')
+                                    <p class="help is-size-6 is-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="field">
                                 <label class="label">Quantity</label>
                                 <div class="control">
-                                    <input class="input" type="number" step="1" name="cantidad">
+                                    <input class="input" type="number" step="1" name="cantidad" value="0">
                                 </div>
+                                @error('cantidad')
+                                    <p class="help is-size-6 is-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="field is-grouped">
                                 <div class="control">
-                                  <button type="submit" class="button is-link">Save</button>
+                                    <button type="submit" class="button is-link">Save</button>
                                 </div>
                                 <div class="control">
-                                  <a href="{{ route('products.index') }}" class="button is-secondary">Cancel</a>
+                                    <a href="{{ route('products.index') }}" class="button is-secondary">Cancel</a>
                                 </div>
-                              </div>
+                            </div>
                         </form>
                     </div>
                 </div>

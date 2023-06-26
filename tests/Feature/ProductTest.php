@@ -20,6 +20,7 @@ class ProductTest extends TestCase
         DB::table('products')->truncate();
         DB::statement('ALTER TABLE products AUTO_INCREMENT = 1;');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 
     /**
@@ -150,7 +151,7 @@ class ProductTest extends TestCase
     {
 
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
-        Product::factory(20)->create();
+        Product::factory(20)->create(); 
 
         $product = Product::find(11); //Se busca el producto con el Id. 11
 
