@@ -34,6 +34,19 @@ Así podrá ya comprobar que el proyecto se instaló correctamente.
 - [Editar Productos](https://www.youtube.com/watch?v=Kjb-l411gKQ): (Video 6/11) Realizando el test y agregando las afirmaciones necesarias para la comprobación de Editar Productos..
 - [Eliminar Productos](https://www.youtube.com/watch?v=8vSs7kn865E): (Video 7/11) Realizando el test y agregando las afirmaciones necesarias para la comprobación de Eliminar Productos.
 - [Validaciones](https://www.youtube.com/watch?v=7j0vqvV2vFI): (Video 8/11) Realizando el test y agregando las afirmaciones necesarias para la comprobación de las validaciones de los datos de formularios a traves de Form Request Personalizado.
+
+### Los siguientes videos de este curso es informativo.
+
+- [Falso Positivo](https://www.youtube.com/watch?v=Pq3UBo0EaNE): (Video 9/11) Explicación de como ocurre el Falso Positivo y que hacer para prevenirlo.
+- [Roles](https://www.youtube.com/watch?v=NqIAK6xpMEM): (Video 10/11) Implementando roles de usuario con la comprobación básica y su respectiva pruebas para la autenticación.
+- [Validaciones](https://www.youtube.com/watch?v=7j0vqvV2vFI): (Video 11/11) Video final del curso. Explicando los ultimos tests y tips finales.
+
+## Agradecimiento
+
+Este es un agradecimiento personal al Canal [Code with Luis](https://www.youtube.com/@codewithluis), el cual me ayudó comprender los fundamentos básicos e iniciales para la realizacion de pruebas en Laravel mediante la herramienta integrada de PHPUnit. Asi como tambien la importancia de realizar un proyecto con los test necesario para su funcionalidad y basado en la metodología de TDD.
+
+Este recurso o repositorio es un ejemplo de lo aprendido en este Video-Curso.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
