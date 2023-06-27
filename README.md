@@ -11,7 +11,7 @@ Puede ser útil si se desea aprender la realizacion de tests sobre cualquier pro
 ## Instalación
 
 Solo clone este repositorio utilizando la linea de comando: 
-`git clone <url>`
+`git clone https://github.com/Alexis79Bck/testing-example.git`
 
 Lo siguiente es ingresar al directorio del proyecto que se ha clonado:
 `cd testing-example`
