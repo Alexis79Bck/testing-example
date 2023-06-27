@@ -39,7 +39,7 @@ Así podrá ya comprobar que el proyecto se instaló correctamente.
 
 - [Falso Positivo](https://www.youtube.com/watch?v=Pq3UBo0EaNE): (Video 9/11) Explicación de como ocurre el Falso Positivo y que hacer para prevenirlo.
 - [Roles](https://www.youtube.com/watch?v=NqIAK6xpMEM): (Video 10/11) Implementando roles de usuario con la comprobación básica y su respectiva pruebas para la autenticación.
-- [Validaciones](https://www.youtube.com/watch?v=7j0vqvV2vFI): (Video 11/11) Video final del curso. Explicando los ultimos tests y tips finales.
+- [Video Final](https://www.youtube.com/watch?v=7j0vqvV2vFI): (Video 11/11) Video final del curso. Explicando los ultimos tests y tips finales.
 
 ## Agradecimiento
 
