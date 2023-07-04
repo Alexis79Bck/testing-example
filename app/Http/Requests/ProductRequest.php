@@ -39,9 +39,9 @@ class ProductRequest extends FormRequest
             'descripcion.string' => 'El campo descripción debe ser una cadena de caracteres.',
             'tipo.string' => 'El campo tipo debe ser una cadena de caracteres.',
             'costo.numeric' => 'El campo costo debe ser un número.',
-            'costo.min' => 'El campo costo no debe ser un número negativo.', 
-            'cantidad.numeric' => 'El campo cantidad debe ser un número.',  
-            'cantidad.min' => 'El campo cantidad no debe ser un número negativo.', 
+            'costo.min' => 'El campo costo no debe ser un número negativo.',
+            'cantidad.numeric' => 'El campo cantidad debe ser un número.',
+            'cantidad.min' => 'El campo cantidad no debe ser un número negativo.',
         ];
     }
 }

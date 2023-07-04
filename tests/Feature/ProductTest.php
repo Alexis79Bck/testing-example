@@ -151,7 +151,7 @@ class ProductTest extends TestCase
     {
 
         //Data de prueba, en este caso se utilizó el metodo factory para crear 20 productos.
-        Product::factory(20)->create(); 
+        Product::factory(20)->create();
 
         $product = Product::find(11); //Se busca el producto con el Id. 11
 
@@ -215,11 +215,11 @@ class ProductTest extends TestCase
         $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
 
         $response->assertRedirect(route('products.index')); //Se afirma que el redireccionamiento sea dirigido a la ruta "products.index"
-        
+
         $response = $this->get(route('products.show', $product)); //Se obtiene la respuesta GET del HTTP
-        
+
         $response->assertNotFound(); //Se afirma si la respuesta genera el codigo de estado 404 para la URL que no existe
-        
+
         $this->assertDatabaseMissing('products', $product->toArray()); //Se afirma que los datos del producto se encuentre en la base de datos.
 
     }
