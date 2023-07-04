@@ -177,11 +177,12 @@ class ProductTest extends TestCase
 
         $newData = [
             'descripcion' => 'Nueva Descripcion desde Editar',
+            'tipo' => 'Audio',
             'costo' => 256.88,
             'cantidad' => 80,
         ]; //La nueva información para actualizar sobre el producto encontrado
 
-        $response = $this->put(route('products.update', $product), $newData); //Se obtiene la respuesta GET del HTTP
+        $response = $this->from(route('products.index'))->put(route('products.update', $product->id), $newData); //Se obtiene la respuesta GET del HTTP
 
         $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
 
@@ -210,7 +211,7 @@ class ProductTest extends TestCase
 
         $product = Product::find(11); //Se busca el producto con el Id. 11
 
-        $response = $this->delete(route('products.delete', $product)); //Se obtiene la respuesta GET del HTTP
+        $response = $this->delete(route('products.delete', $product->id)); //Se obtiene la respuesta GET del HTTP
 
         $response->assertStatus(302); //Se afirma si la respuesta genera el codigo de estado 302 para el redireccionamiento
 
